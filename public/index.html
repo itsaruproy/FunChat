@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunChat</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>FunChat</h1>
+    </header>
+    <div class="statusArea">
+        <h2>Online : <span id="userCount">0</span></h2>
+    </div>
+    <div class="messages">
+        <div class="other-chat">
+            <div class="msg">
+                <span>Name: </span>
+                <span>Message</span>
+            </div>
+        </div>
+        <div class="my-chat">
+            <div class="msg">
+                <span>MyName: </span>
+                <span>Message</span>
+            </div>
+        </div>
+    </div>
+    <div class="inputArea">
+        <input id="chatMessage" type="text">
+        <button id="sendMsg" type="submit">Send</button>
+    </div>
+
+    <div id="nickname" class="nickname modal--visible">
+        <h1>Choose your fake name</h1>
+        <input id="nicknameSelector" type="text" placeholder="Type here ...">
+        <span id="alreadyExistedName"></span>
+        <button id="nicknameSubmit" type="submit">Submit</button>
+    </div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/main.js"></script>
+ 
+</body>
+</html>
