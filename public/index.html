@@ -5,42 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FunChat</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <header>
-        <h1>FunChat</h1>
-    </header>
-    <div class="statusArea">
-        <h2>Online : <span id="userCount">0</span></h2>
-    </div>
-    <div class="messages">
-        <!-- <div class="other-chat">
-            <div class="msg">
-                <span>Name: </span>
-                <span>Message</span>
+    <div class="app">
+        <div class="app__chatbox">
+            <div class="app__status">
+                <div class="app__status-online">
+                    <div class="app__status-logo"></div>
+                    <span class="app__status-text"><span class="app__status-count">3</span> active members</span>
+                </div>
+            </div>
+            <div class="app__chatarea">
+                <div class="app__chat-system">
+                    <div class="app__chat-msg">
+                        <span class="app__chat-msgtext">Arup joined</span>
+                    </div>
+                </div>
+                <div class="app__chat-recv">
+                    <div class="app__chat-msg">
+                        <span class="app__chat-msgname">Name</span>
+                        <span class="app__chat-msgtext">Hi there, this is my first message</span>
+                    </div>
+                </div>
+                <div class="app__chat-sent">
+                    <div class="app__chat-msg">
+                        <span class="app__chat-msgname">Name</span>
+                        <span class="app__chat-msgtext">Hello there, this is my first message</span>
+                    </div>
+                </div>
+
+                <div class="app__chat-system">
+                    <div class="app__chat-msg">
+                        <span class="app__chat-msgtext">Arup left</span>
+                    </div>
+                </div>
+            </div>
+            <div class="app__sendarea">
+                <div class="app__sendarea-text">
+                    <input type="text" name="" id="" placeholder="Type a message...">
+                    <button type="submit">Send</button>
+                </div>
             </div>
         </div>
-        <div class="my-chat">
-            <div class="msg">
-                <span>MyName: </span>
-                <span>Message</span>
-            </div>
-        </div> -->
-    </div>
-    <div class="inputArea">
-        <input id="chatMessage" type="text">
-        <button id="sendMsg" type="submit">Send</button>
     </div>
 
-    <div id="nickname" class="nickname modal--visible">
-        <h1>Choose your nickname</h1>
-        <input id="nicknameSelector" type="text" placeholder="Type here ...">
-        <span id="alreadyExistedName"></span>
-        <button id="nicknameSubmit" type="submit">Submit</button>
+    <div class="modal">
+        <div class="modal__container">
+            <div class="modal__container--text">
+                <h1>Please choose your username</h1>
+            </div>
+            <div class="modal__container--form">
+                <div class="modal__container--input">
+                    <input type="text" placeholder="Enter your username">
+                    <button type="submit">Submit</button>
+                    <span class="modal__container-error hide">Sorry, this username has been taken. Try another</span>
+                </div>
+            </div>
+        </div>
     </div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/main.js"></script>
- 
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
 </body>
 </html>
