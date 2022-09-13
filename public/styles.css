@@ -110,7 +110,7 @@ body {
 .app__chatarea {
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .app__chatarea .app__chat-recv,  .app__chatarea .app__chat-sent{
