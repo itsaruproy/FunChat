@@ -5,18 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FunChat</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div class="app">
+    <div class="app hide" id="app">
         <div class="app__chatbox">
             <div class="app__status">
                 <div class="app__status-online">
                     <div class="app__status-logo"></div>
-                    <span class="app__status-text"><span class="app__status-count">3</span> active members</span>
+                    <span class="app__status-text"><span class="app__status-count" id="userCount">3</span> active members</span>
                 </div>
             </div>
-            <div class="app__chatarea">
+            <div class="app__chatarea" id="chatLog">
+                <!-- 
                 <div class="app__chat-system">
                     <div class="app__chat-msg">
                         <span class="app__chat-msgtext">Arup joined</span>
@@ -40,26 +41,28 @@
                         <span class="app__chat-msgtext">Arup left</span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="app__sendarea">
                 <div class="app__sendarea-text">
-                    <input type="text" name="" id="" placeholder="Type a message...">
-                    <button type="submit">Send</button>
+                    <input type="text" name="" id="chatMessage" placeholder="Type a message...">
+                    <button type="submit" id="sendMsg">Send</button>
                 </div>
             </div>
+            
         </div>
     </div>
 
-    <div class="modal">
+    <div class="modal active" id="modal">
         <div class="modal__container">
             <div class="modal__container--text">
                 <h1>Please choose your username</h1>
             </div>
             <div class="modal__container--form">
                 <div class="modal__container--input">
-                    <input type="text" placeholder="Enter your username">
-                    <button type="submit">Submit</button>
-                    <span class="modal__container-error hide">Sorry, this username has been taken. Try another</span>
+                    <input type="text" placeholder="Enter your username" id="nicknameSelector">
+                    <button type="submit" id="nicknameSubmit">Submit</button>
+                    <span class="modal__container-error hide" id="alreadyExistedName">Sorry, this username has been taken. Try another</span>
                 </div>
             </div>
         </div>
