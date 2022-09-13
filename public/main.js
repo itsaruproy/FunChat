@@ -3,10 +3,11 @@ class Chat {
       this.socket = null
       this.openedYet = false
       this.chatName = ""
-      this.nickName = document.querySelector("#nickname")
+      this.modal = document.querySelector("#modal")
+      this.app = document.querySelector("#app")
       this.userCount = document.querySelector("#userCount")
       this.chatField = document.querySelector("#chatMessage")
-      this.chatLog = document.querySelector(".messages")
+      this.chatLog = document.querySelector("#chatLog")
       this.sendButton = document.querySelector("#sendMsg")
       this.nickNameSelector = document.querySelector("#nicknameSelector")
       this.nickNameSubmit = document.querySelector("#nicknameSubmit")
@@ -31,12 +32,13 @@ class Chat {
       this.socket.on('loginSuccess', (data) => {
         console.log(data)
         this.chatName = data.nickname
-        this.nickName.style.display = 'none'
+        this.modal.classList.remove("active")
+        this.app.classList.remove("hide")
       })
   
       this.socket.on('nickExisted', () => {
         console.log("nickname existed")
-        this.alreadyExistedName.textContent = "NickName Alrady Existed, try with different name"
+        this.alreadyExistedName.classList.remove("hide")
       })
   
       this.socket.on('system', (data) => {
@@ -50,10 +52,10 @@ class Chat {
     sendMessageToServer() {
       this.socket.emit('chatMessageFromBrowser', {message: this.chatField.value, username: this.chatName})
       this.chatLog.insertAdjacentHTML('beforeend',`
-      <div class="my-chat">
-              <div class="msg">
-                  <span>${this.chatName}: </span>
-                  <span>${this.chatField.value}</span>
+          <div class="app__chat-sent">
+              <div class="app__chat-msg">
+                  <span class="app__chat-msgname">${this.chatName}</span>
+                  <span class="app__chat-msgtext">${this.chatField.value}</span>
               </div>
           </div>
       `)
@@ -63,7 +65,7 @@ class Chat {
     }
   
     hideModal() {
-      this.nickName.classList.remove("modal--visible")
+      this.modal.classList.remove("active")
     }
   
     showChat() {
@@ -71,7 +73,7 @@ class Chat {
         this.openConnection()
       }
       this.openedYet = true
-      this.nickName.classList.add("modal--visible")
+      this.modal.classList.add("active")
       this.nickNameSelector.focus()
     }
   
@@ -83,24 +85,23 @@ class Chat {
   
     displaySystemMessage(data) {
       this.chatLog.insertAdjacentHTML('beforeend', `
-      <div class="other-chat">
-              <div class="msg">
-                  <span>${data.username}</span>
-                  <span>${data.message}</span>
-              </div>
-          </div>
+                <div class="app__chat-system">
+                    <div class="app__chat-msg">
+                        <span class="app__chat-msgtext">${data.username} ${data.message}</span>
+                    </div>
+                </div>
       `)
       this.chatLog.scrollTop = this.chatLog.scrollHeight
     }
   
     displayMessageFromServer(data) {
       this.chatLog.insertAdjacentHTML('beforeend', `
-      <div class="other-chat">
-              <div class="msg">
-                  <span>${data.username} : </span>
-                  <span>${data.message}</span>
-              </div>
-          </div>
+                <div class="app__chat-recv">
+                    <div class="app__chat-msg">
+                        <span class="app__chat-msgname">${data.username}</span>
+                        <span class="app__chat-msgtext">${data.message}</span>
+                    </div>
+                </div>
       `)
       this.chatLog.scrollTop = this.chatLog.scrollHeight
     }
