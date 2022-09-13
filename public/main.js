@@ -3,6 +3,8 @@ class Chat {
       this.socket = null
       this.openedYet = false
       this.chatName = ""
+      this.typingTimeout = null
+      this.amTyping = false
       this.modal = document.querySelector("#modal")
       this.app = document.querySelector("#app")
       this.userCount = document.querySelector("#userCount")
@@ -46,9 +48,33 @@ class Chat {
           this.userCount.textContent = data.total
           this.displaySystemMessage({username: data.nickname, message: txt})
       })
+
+      this.socket.on('displayTyping', () => {
+        this.displayTypingAnimation()
+      })
+
+      this.socket.on('removeTyping', () => {
+        this.removeTypingAnimation()
+      })
+
+      this.chatField.addEventListener('keypress', () => {
+        if(!this.amTyping) {
+          this.socket.emit('typing')
+          this.amTyping = true
+        }
+        if(this.typingTimeout) {
+          clearTimeout(this.typingTimeout)
+        }
+        this.typingTimeout = setTimeout(() => {
+          this.amTyping = false
+          this.socket.emit('typingStop')
+        }, 2000)
+      })
     }
   
     // Methods
+    
+
     sendMessageToServer() {
       this.socket.emit('chatMessageFromBrowser', {message: this.chatField.value, username: this.chatName})
       this.chatLog.insertAdjacentHTML('beforeend',`
@@ -104,6 +130,27 @@ class Chat {
                 </div>
       `)
       this.chatLog.scrollTop = this.chatLog.scrollHeight
+    }
+
+    displayTypingAnimation() {
+      this.chatLog.insertAdjacentHTML('beforeend', `
+        <div class="app__chat-typing">
+          <div class="app__chat-dots">
+              <span class="app__chat-dot one"></span>
+              <span class="app__chat-dot two"></span>
+              <span class="app__chat-dot three"></span>
+          </div>
+        </div>
+      
+      `)
+
+      this.chatLog.scrollTop = this.chatLog.scrollHeight
+    }
+
+    removeTypingAnimation() {
+        this.animationWrapper = document.querySelector(".app__chat-typing")
+        this.animationWrapper.remove()
+        this.chatLog.scrollTop = this.chatLog.scrollHeight
     }
   
   }

@@ -37,5 +37,16 @@ io.on('connection', socket => {
         console.log(data)
         socket.broadcast.emit('chatMessageFromServer', {username : socket.nickname, message: data.message})
     })
+
+    socket.on('typing', data => {
+        console.log("New message arrived")
+        console.log(data)
+        socket.broadcast.emit('displayTyping')
+    })
+    socket.on('typingStop', data => {
+        console.log("New message arrived")
+        console.log(data)
+        socket.broadcast.emit('removeTyping')
+    })
     
 })

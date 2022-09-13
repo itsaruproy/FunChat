@@ -111,6 +111,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    position: relative;
 }
 
 .app__chatarea .app__chat-recv,  .app__chatarea .app__chat-sent{
@@ -149,6 +150,52 @@ body {
 
 .app__chatarea .app__chat-recv .app__chat-msgtext,  .app__chatarea .app__chat-sent .app__chat-msgtext {
     font-weight: 300;
+}
+
+.app__chatarea .app__chat-typing {
+    /*position: absolute;
+    bottom: 0;
+    left: 0;
+    */
+    margin-right: auto;
+    max-width: 40%;
+    background: var(--chat-panel-background);
+    color: var(--chat-text-color);
+    padding: .5rem 1.2rem;
+    font-weight: 300;
+    font-size: 12px;
+    border-radius: 1rem;
+    margin-bottom: .5rem;
+}
+
+.app__chatarea .app__chat-typing .app__chat-dots .app__chat-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 0.5px;
+    background: #60f;
+    animation: wave 1s linear infinite;
+    animation-delay: -0.9s;
+}
+
+.app__chatarea .app__chat-typing .app__chat-dots .app__chat-dot.two {
+    animation-delay: -0.7s;
+}
+
+.app__chatarea .app__chat-typing .app__chat-dots .app__chat-dot:nth-child(3) {
+    animation-delay: -0.6s;
+}
+
+@keyframes wave {
+    0%,
+      60%,
+      100% {
+      transform: initial;
+    }
+    30% {
+      transform: translateY(-15px);
+    }
 }
 
 
